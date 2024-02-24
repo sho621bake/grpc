@@ -10,6 +10,9 @@ package myapp;
 // サービスの定義
 service GreetingService {
 	rpc Hello(HelloRequest) returns (HelloResponse);
+
+	// サーバーストリーミングRPC
+	rpc HelloServerStream(HelloRequest) returns (stream HelloResponse);
 }
 
 // 型の定義
