@@ -18,15 +18,14 @@ type myServer struct {
 	hellopb.UnimplementedGreetingServiceServer
 }
 
-
+// Hello 関数は、リクエストからnameフィールドを取り出して、Hello、[名前]というレスポンスを返す
 func (s *myServer) Hello(ctx context.Context, req *hellopb.HelloRequest) (*hellopb.HelloResponse, error) {
-	// リクエストからnameフィールドを取り出して、Hello、[名前]というレスポンスを返す
 	return &hellopb.HelloResponse{
 		Message: fmt.Sprintf("Hello %s!", req.GetName()),
-	},nil
+	}, nil
 }
 
-// サービス構造体のコンストラクタを定義
+// NewMyServer はサービス構造体のコンストラクタを定義
 func NewMyServer() *myServer {
 	return &myServer{}
 }
@@ -46,7 +45,7 @@ func main() {
 	// サーバーリフレクションの設定
 	reflection.Register(s)
 
-	go func ()  {
+	go func() {
 		log.Printf("start gRPC server port: %v", port)
 		s.Serve(listener)
 	}()
